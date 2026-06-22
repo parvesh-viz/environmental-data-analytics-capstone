@@ -94,7 +94,9 @@ master = pd.merge(
     how="inner"
 )
 
+# ---------------------------------
 # Keep common year range
+# ---------------------------------
 
 master = master[
     (master["Year"] >= 2000)
@@ -102,12 +104,30 @@ master = master[
     (master["Year"] <= 2023)
 ]
 
-# Save
+# ---------------------------------
+# Remove unnecessary columns
+# ---------------------------------
+
+master = master.drop(
+    columns=["month"]
+)
+
+# ---------------------------------
+# Save master dataset
+# ---------------------------------
 
 master.to_csv(
     "data/processed/master_environment_dataset.csv",
     index=False
 )
 
+print("\nShape:")
 print(master.shape)
+
+print("\nColumns:")
+print(master.columns.tolist())
+
+print("\nFirst 5 Rows:")
 print(master.head())
+
+print("\nMaster dataset created successfully.")
